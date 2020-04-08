@@ -4,3 +4,15 @@
     outline: 0;
     box-sizing: border-box;
 }
+
+.navbar{
+    border: none !important;
+}
+
+.jumbotron{
+    border-radius: 0;
+}
+
+.navbar-toggler{
+    border: none;
+}
