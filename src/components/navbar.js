@@ -19,7 +19,7 @@ export default function Navbar() {
                     <a className="nav-link" href="/register">Cadastro</a>
                 </li>
                 <li className="nav-item">
-                    <a className="nav-link" href="#">Consulta</a>
+                    <a className="nav-link" href="/query">Consulta</a>
                 </li>
             </ul>
         </div>
