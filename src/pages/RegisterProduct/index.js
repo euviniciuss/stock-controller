@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { FiCheck, FiX } from 'react-icons/fi';
 
-export default function Register(){
+export default function RegisterProduct(){
 
     const [name, setName] = useState('');
     const [sku, setSku] = useState('');
