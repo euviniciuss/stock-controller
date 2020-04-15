@@ -1,13 +1,13 @@
 import firebase from 'firebase';
 
 const firebaseConfig = {
-    apiKey: "AIzaSyDGtei5X90jizYrzeteUjx5WDPe4HdACkc",
-    authDomain: "stock-controller-8527a.firebaseapp.com",
-    databaseURL: "https://stock-controller-8527a.firebaseio.com",
-    projectId: "stock-controller-8527a",
-    storageBucket: "stock-controller-8527a.appspot.com",
-    messagingSenderId: "644876370254",
-    appId: "1:644876370254:web:09457ec6039e8d8e72de1f"
-  };
+  apiKey: "AIzaSyCshnZGoU85lEEcPr47-uY3lPa_LX9CRMM",
+  authDomain: "stock-controller-944a7.firebaseapp.com",
+  databaseURL: "https://stock-controller-944a7.firebaseio.com",
+  projectId: "stock-controller-944a7",
+  storageBucket: "stock-controller-944a7.appspot.com",
+  messagingSenderId: "478100758045",
+  appId: "1:478100758045:web:38ad40441d2500c7e6f0f4"
+};
 // Initialize Firebase
 export default firebase.initializeApp(firebaseConfig);

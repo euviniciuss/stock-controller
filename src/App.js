@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import './global.css';
 
@@ -8,8 +9,10 @@ import Routes from './routes';
 export default function App() {
   return(
     <>
-      <Navbar />
-      <Routes />
+      <BrowserRouter>
+        <Navbar />
+        <Routes />
+      </BrowserRouter>
     </>
   );
 };

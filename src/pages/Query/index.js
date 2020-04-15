@@ -22,7 +22,7 @@ export default function Query(){
         <button onClick={handleName}>Clicar</button>
         <button onClick={clear}>Limpar</button>
 
-        <Link to='/register'>TESTE</Link>
+        <Link to='/registerProduct'>TESTE</Link>
         </>
     );
 };

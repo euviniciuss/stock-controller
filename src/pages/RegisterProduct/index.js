@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import firebase from '../../config/firebase';
 import { FiCheck, FiX } from 'react-icons/fi';
 
 export default function RegisterProduct(){
@@ -11,15 +12,28 @@ export default function RegisterProduct(){
     const [provider, setProvider] = useState('');
 
     const history = useHistory();
+    const db = firebase.firestore();
 
     function handleSave(){
-        alert('Seu item foi salvo com sucesso!');
-        history.push('/query');
+        
+        db.collection('products').add({
+            name: name,
+            sku: sku,
+            description: description,
+            price: price,
+            provider: provider
+        }).then(() => {
+            alert('Produtos cadastrados no banco')
+            setTimeout(() => history.push('/query'), 1500);
+        }).catch( erro => {
+            alert('OPS!Algo deu errado')
+        } )
+
     };
 
     function handleCancel(){
         alert('cancelado');
-        history.push('/');
+        setTimeout(() => history.push('/'), 1500);
     };
 
     return (
