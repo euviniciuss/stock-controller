@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import firebase from '../../config/firebase';
+import { FiTrash, FiEdit } from 'react-icons/fi';
 
 export default function Query() {
 
@@ -42,7 +43,16 @@ export default function Query() {
                                 <th>{item.sku}</th>
                                 <th>{item.price}</th>
                                 <th>{item.provider}</th>
-                                <th></th>
+                                <th>
+                                    <div className="row">
+                                        <button className="d-flex align-items-center mr-2 btn btn-primary" title="Editar">
+                                            <FiEdit />&nbsp;Editar
+                                        </button>
+                                        <button className="d-flex align-items-center btn btn-danger" title="Deletar">
+                                            <FiTrash />&nbsp;Deletar
+                                        </button>
+                                    </div>
+                                </th>
                             </tr>
                         </tbody>
                     ))}
