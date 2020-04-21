@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import firebase from '../../config/firebase';
-import { FiCheck, FiX } from 'react-icons/fi';
+import { FiCheck, FiCheckCircle, FiX } from 'react-icons/fi';
 
 export default function RegisterProduct(){
 
@@ -10,6 +10,7 @@ export default function RegisterProduct(){
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState(0);
     const [provider, setProvider] = useState('');
+    const [msgSucesso, setMsgSucess] = useState(false);
 
     const history = useHistory();
     const db = firebase.firestore();
@@ -23,8 +24,8 @@ export default function RegisterProduct(){
             price: price,
             provider: provider
         }).then(() => {
-            alert('Produtos cadastrados no banco')
-            setTimeout(() => history.push('/query'), 1500);
+            setMsgSucess(true);
+            setTimeout(() => history.push('/query'), 3000);
         }).catch( erro => {
             alert('OPS!Algo deu errado')
         } )
@@ -33,7 +34,7 @@ export default function RegisterProduct(){
 
     function handleCancel(){
         alert('cancelado');
-        setTimeout(() => history.push('/'), 1500);
+        setTimeout(() => history.push('/'), 3000);
     };
 
     return (
@@ -43,6 +44,12 @@ export default function RegisterProduct(){
             </div>
 
             <div className="card-body">
+                { msgSucesso && 
+                    <div className="alert alert-dismissible alert-success">
+                        <button type="button" className="close" data-dismiss="alert">&times;</button>
+                        <strong><FiCheckCircle size="16"/> Cadastro concluido!</strong> Cadastro do produto realizado com sucesso!
+                    </div>
+                }
 
                 <div className="row">
                     <div className="col-md-6">
