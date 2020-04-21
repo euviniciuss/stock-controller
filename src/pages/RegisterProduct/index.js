@@ -23,7 +23,7 @@ export default function RegisterProduct() {
             setMsgType('erro');
         }
         else {
-            firebase.firestore().db.collection('products').add({
+            firebase.firestore().collection('products').add({
                 name: name,
                 sku: sku,
                 description: description,

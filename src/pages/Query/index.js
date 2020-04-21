@@ -1,28 +1,53 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import firebase from '../../config/firebase';
 
-export default function Query(){
+export default function Query() {
 
-    const [teste, setTeste] = useState();
+    const [products, setProducts] = useState([]);
+    let listProducts = [];
 
-    function handleName() {
-        alert(teste);
-    };
-    function clear(e) {
-        e.preventDefault()
-        alert(teste)
-    };
+    useEffect(() => {
+        firebase.firestore().collection('products').get().then( async(result) => {
+            await result.docs.forEach( doc => {
+                listProducts.push({
+                    id: doc.id,
+                    ...doc.data()
+                })
+            })
 
-    return(
-        <>
-        <h1>Hello</h1>
+            setProducts(listProducts);
+        })
+    });
 
-        <input onChange={e => setTeste(e.target.value)} type="text"/>
-
-        <button onClick={handleName}>Clicar</button>
-        <button onClick={clear}>Limpar</button>
-
-        <Link to='/registerProduct'>TESTE</Link>
-        </>
+    return (
+        <div className="card">
+            <div className="card-header">
+                <h4>Consulta de Produtos</h4>
+            </div>
+            <div className="card-body">
+                <table className="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>SKU</th>
+                            <th>Preço</th>
+                            <th>Fornecedor</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    {products.map(item => (
+                        <tbody key={item.id}>
+                            <tr>
+                                <th>{item.name}</th>
+                                <th>{item.sku}</th>
+                                <th>{item.price}</th>
+                                <th>{item.provider}</th>
+                                <th></th>
+                            </tr>
+                        </tbody>
+                    ))}
+                </table>
+            </div>
+        </div>
     );
 };
