@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import { FiTrash, FiEdit } from 'react-icons/fi';
 
@@ -7,8 +8,11 @@ export default function Query() {
     const [products, setProducts] = useState([]);
     let listProducts = [];
 
+    const history = useHistory();
+    const db = firebase.firestore();
+
     useEffect(() => {
-        firebase.firestore().collection('products').get().then( async(result) => {
+        db.collection('products').get().then( async(result) => {
             await result.docs.forEach( doc => {
                 listProducts.push({
                     id: doc.id,
@@ -19,6 +23,14 @@ export default function Query() {
             setProducts(listProducts);
         })
     });
+
+    function handleEdit(sku){
+        history.push(`/registerProduct/${sku}`);
+    };
+
+    function handleDelete(){
+        alert('deletar')
+    };
 
     return (
         <div className="card">
@@ -45,10 +57,10 @@ export default function Query() {
                                 <th>{item.provider}</th>
                                 <th>
                                     <div className="row">
-                                        <button className="d-flex align-items-center mr-2 btn btn-primary" title="Editar">
+                                        <button onClick={() => handleEdit(item.sku)} className="d-flex align-items-center mr-2 btn btn-primary" title="Editar">
                                             <FiEdit />&nbsp;Editar
                                         </button>
-                                        <button className="d-flex align-items-center btn btn-danger" title="Deletar">
+                                        <button onClick={handleDelete} className="d-flex align-items-center btn btn-danger" title="Deletar">
                                             <FiTrash />&nbsp;Deletar
                                         </button>
                                     </div>

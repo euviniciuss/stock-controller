@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useParams } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import { FiCheck, FiCheckCircle, FiXCircle, FiX, FiAlertCircle } from 'react-icons/fi';
 
@@ -13,6 +13,10 @@ export default function RegisterProduct() {
     const [msgType, setMsgType] = useState();
 
     const history = useHistory();
+    const db = firebase.firestore();
+    const url  = useParams();
+    const paramsUrl = [];
+    const data = [];
 
     function handleSave() {
         // eslint-disable-next-line
@@ -23,7 +27,7 @@ export default function RegisterProduct() {
             setMsgType('erro');
         }
         else {
-            firebase.firestore().collection('products').add({
+            db.collection('products').add({
                 name: name,
                 sku: sku,
                 description: description,
@@ -37,6 +41,37 @@ export default function RegisterProduct() {
             })
         }
     };
+
+    
+    useEffect(() => {
+        paramsUrl.push(url.sku);
+        
+        if(paramsUrl[0] !== undefined){
+            db.collection('products').where('sku', '==' , paramsUrl[0])
+                .get()
+                .then( async(result) => {
+                    await result.docs.forEach( doc => {
+                        data.push({
+                            id: doc.id,
+                            ...doc.data()
+                        })
+                    })
+                    
+                    if(data[0].sku === paramsUrl[0]){
+                        setName(data[0].name);
+                        setSku(data[0].sku);
+                        setDescription(data[0].description);
+                        setPrice(data[0].price);
+                        setProvider(data[0].provider);
+                    }
+
+                } )
+        };
+        
+        
+        // eslint-disable-next-line
+    }, []);
+    
 
     function handleCancel() {
         setMsgType('cancel')
