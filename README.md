@@ -48,3 +48,7 @@ Este projeto foi desenvolvido utilizando as seguintes tecnologias:
 <h4 align="center">
     👨🏻‍🚀 Feito por <a href="https://www.linkedin.com/in/marcus-vinicius-silva-costa-6098911a4" target="_blank">Marcus Vinicius</a>
 </h4>
+
+<h4 align="center"> 
+	🚧  Stock Controller 🚀 Em construção...  🚧
+</h4>
